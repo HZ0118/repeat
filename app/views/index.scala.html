@@ -1,0 +1,84 @@
+@(user: models.users.User)
+
+@main("Home", user) {
+    <div id = "intro">
+        <h4>
+            <p>There are those of use who like to <strong>VENTURE</strong> to the unexplored.</p>
+            <p>To see the <strong>BEAUTY</strong> in the strange and <strong>UNKNOWN</strong>.</p>
+            <p>Those of us who go out there with a sense of <strong>WONDER</strong>.</p>
+            <p>Bridging worlds, cultivating our <strong>CURIOSITY</strong> and finding <strong>DELIGHT</strong> in our differences.</p>
+            <p>If you're one of us, and you want to <strong>EXPLORE</strong> more of this <strong>GREAT PLANET</strong>,</p>
+            <p>We're ready to take you there.</p>
+            <p>It's Time.</p>
+            <p><strong>WIDEN YOUR WORLD</strong></p>
+        </h4>
+    </div>
+
+    <div class="polaroid">
+        <a href="@routes.AdminController.flights()">
+        <img src="@routes.Assets.versioned("images/Alicante.jpg")" alt="Alicante" width = 100% height = 200px">
+        <p>Alicante, Spain</p>
+        </a>
+    </div>
+
+    <div class="polaroid">
+        <a href="@routes.AdminController.flights()">
+        <img src="@routes.Assets.versioned("images/china.jpg")" alt="China" width = 100% height = 200px>
+        <p>The Great Wall, China</p>
+        </a>
+    </div>
+
+    <div class="polaroid">
+        <a href="@routes.AdminController.flights()">
+        <img src="@routes.Assets.versioned("images/germany.jpg")" alt="Germany" width = 100% height = 200px>
+        <p>Berlin, Germany</p>
+        </a>
+    </div>
+
+    <div class="polaroid">
+        <a href="@routes.AdminController.flights()">
+        <img src="@routes.Assets.versioned("images/france.jpg")" alt="France" width = 100% height = 200px>
+        <p>Paris, France</p>
+        </a>
+    </div>
+
+    <div class="polaroid">
+        <a href="@routes.AdminController.flights()">
+        <img src="@routes.Assets.versioned("images/romania.jpg")" alt="Romania" width = 100% height = 200px>
+        <p>Bucharest, Romania</p>
+        </a>
+    </div>
+
+    <div class="polaroid">
+        <a href="@routes.AdminController.flights()">
+        <img src="@routes.Assets.versioned("images/lithuania.jpg")" alt="Lithuania" width = 100% height = 200px>
+        <p>Vilnius, Lithuania</p>
+        </a>
+    </div>
+
+    <div class="polaroid">
+        <a href="@routes.AdminController.flights()">
+        <img src="@routes.Assets.versioned("images/hungary.jpg")" alt="Hungary" width = 100% height = 200px>
+        <p>Budapest, Hungary</p>
+        </a>
+    </div>
+
+    <div class="polaroid">
+        <a href="@routes.AdminController.flights()">
+        <img src="@routes.Assets.versioned("images/japan.jpg")" alt="Japan" width = 100% height = 200px>
+        <p>Tokyo, Japan</p>
+        </a>
+    </div>
+
+    <div class="polaroid">
+        <a href="@routes.AdminController.flights()">
+        <img src="@routes.Assets.versioned("images/italy.jpg")" alt="Italy" width = 100% height = 200px>
+        <p>Rome, Italy</p>
+        </a>
+    </div>
+
+    <div id="moreFlights">
+        <a href="@routes.AdminController.flights()">Find more Flights</a>
+    </div>
+
+}

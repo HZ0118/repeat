@@ -1,0 +1,36 @@
+@import models.users.User
+@(flights: List[models.FlightSchedule], user: User)
+
+@main("Flight", user){
+  @if(flash.containsKey("success")){
+    <div class="alert alert-success">
+    @flash.get("success")
+    </div>
+  }
+
+  <table class="table table-bordered table-hover table-condensed">
+    <thead>
+      <tr>
+        <th>Flight</th>
+        <th>Flight Date</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <h3>Flight List</h3>
+      @for(f <- flights) {
+        <tr>
+          <td class="numeric">@f.getFlightID</td>
+          <td>@f.getFlightDate</td>
+          <td>@f.getDepTime</td>
+          <td>@f.getArrTime</td>
+          <td>&euro; @("%.2f".format(f.getPrice))</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+}

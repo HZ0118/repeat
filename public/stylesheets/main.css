@@ -1,0 +1,134 @@
+main {
+    clear: both;
+}
+
+body {
+    margin-bottom: 100px;
+}
+
+nav {
+    height: 70px;
+    background-color: darkblue;
+}
+
+nav img{
+    width: auto;
+    height: 60px;
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 50px;
+    padding-right: 20px;
+}
+
+#mainNav{
+    width:auto;
+    height: 70px;
+    float: left;
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+}
+
+#rightNav {
+    width: auto;
+    float: right;
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    float: left;
+}
+
+nav ul li a {
+    width: 100px;
+    text-decoration: none;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    color: white;
+    text-align: center;
+    line-height: 60px;
+    display:flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+nav ul li a:hover {
+    background-color: mediumblue;
+}
+
+nav li:last-child a {
+    border-right: 0;
+}
+
+#intro {
+    padding: 50px 0;
+}
+
+div.polaroid {
+    width: 30%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-right: 25px;
+    float: left;
+}
+
+div.polaroid p {
+    padding: 15px 15px;
+}
+
+#moreFlights {
+    width: 15%;
+    background-color: white;
+    color: cornflowerblue;
+    border: 1px solid blue;
+    border-radius: 10px;
+    padding: 16px 15px;
+    text-align: center;
+    display: block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    clear: both;
+    margin: auto;
+}
+
+#moreFlights a {
+    text-decoration: none;
+}
+
+#moreFlights:hover {
+    background-color: blue;
+    color: white;
+}
+
+html {
+    position: relative;
+    min-height:100%;
+}
+
+footer{
+    background-color: darkblue;
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+    margin-top: 25px;
+}
+
+footer p {
+    padding-top: 15px;
+}
