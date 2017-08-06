@@ -13,6 +13,8 @@
     @inputText(addFlightForm("departure_time"), '_label -> "Departure Time", 'class -> "form-control")
     @inputText(addFlightForm("arrival_time"), '_label -> "Arrival Time", 'class -> "form-control")
 
+    @inputText(addFlightForm("flight_ID"), '_label -> "", 'hidden -> "hidden")
+
     <div class="actions">
       <input type="submit" value="Add Flight" class="btn btn-primary">
       <a href="@routes.AdminController.flights()">

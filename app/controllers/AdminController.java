@@ -48,20 +48,25 @@ public class AdminController extends Controller {
             return badRequest(addFlights.render(newFlightForm, getUserFromSession()));
         }
         FlightSchedule newFlight = newFlightForm.get();
-        newFlight.save();
+        if(newFlight.getFlight_ID() == null) {
+            newFlight.save();
+        }
+        else if (newFlight.getFlight_ID() != null) {
+            newFlight.update();
+        }
         flash("success", "Flight to " + newFlight.getDestination() + " has been created/ updated");
         return redirect(controllers.routes.AdminController.flights());
     }
 
     @Transactional
-    public Result deleteFlight(int id){
+    public Result deleteFlight(Integer id){
         FlightSchedule.find.ref(id).delete();
         flash("success", "Flight has been deleted");
         return redirect(controllers.routes.AdminController.flights());
     }
 
     @Transactional
-    public Result updateFlight(int id) {
+    public Result updateFlight(Integer id) {
         FlightSchedule f;
         Form<FlightSchedule> flightForm;
         try{

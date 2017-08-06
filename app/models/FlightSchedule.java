@@ -10,7 +10,7 @@ import com.avaje.ebean.*;
 @Entity
 public class FlightSchedule extends Model {
     @Id
-    private int flight_ID;
+    private Integer flight_ID;
     @Constraints.Required
     private String destination;
     @Constraints.Required
@@ -26,7 +26,7 @@ public class FlightSchedule extends Model {
 
     }
 
-    public FlightSchedule(int id,String destination, String origin, String departure_date, String departure_time, String arrival_time){
+    public FlightSchedule(Integer id,String destination, String origin, String departure_date, String departure_time, String arrival_time){
         this.flight_ID = id;
         this.destination = destination;
         this.origin = origin;
@@ -41,11 +41,11 @@ public class FlightSchedule extends Model {
         return FlightSchedule.find.all();
     }
 
-    public int getFlight_ID() {
+    public Integer getFlight_ID() {
         return flight_ID;
     }
 
-    public void setFlight_ID(int flight_ID) {
+    public void setFlight_ID(Integer flight_ID) {
         this.flight_ID = flight_ID;
     }
 
