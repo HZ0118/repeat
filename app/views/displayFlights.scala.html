@@ -12,10 +12,11 @@
     <thead>
       <tr>
         <th>Flight</th>
-        <th>Flight Date</th>
+        <th>Destination</th>
+        <th>Origin</th>
+        <th>Departure Date</th>
         <th>Departure Time</th>
         <th>Arrival Time</th>
-        <th>Price</th>
       </tr>
     </thead>
 
@@ -23,11 +24,12 @@
       <h3>Flight List</h3>
       @for(f <- flights) {
         <tr>
-          <td class="numeric">@f.getFlightID</td>
-          <td>@f.getFlightDate</td>
-          <td>@f.getDepTime</td>
-          <td>@f.getArrTime</td>
-          <td>&euro; @("%.2f".format(f.getPrice))</td>
+          <td class="numeric">@f.getFlight_ID</td>
+          <td>@f.getDestination</td>
+          <td>@f.getOrigin</td>
+          <td>@f.getDeparture_date</td>
+          <td>@f.getDeparture_time</td>
+          <td>@f.getArrival_time</td>
         </tr>
       }
     </tbody>

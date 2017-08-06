@@ -49,7 +49,7 @@ public class AdminController extends Controller {
         }
         FlightSchedule newFlight = newFlightForm.get();
         newFlight.save();
-        flash("success", "Flight " + newFlight.getFlightID() + " has been created/ updated");
+        flash("success", "Flight to " + newFlight.getDestination() + " has been created/ updated");
         return redirect(controllers.routes.AdminController.flights());
     }
 

@@ -10,27 +10,29 @@ import com.avaje.ebean.*;
 @Entity
 public class FlightSchedule extends Model {
     @Id
-    @Constraints.Required
     private int flight_ID;
     @Constraints.Required
-    private String flight_date;
+    private String destination;
+    @Constraints.Required
+    private String origin;
+    @Constraints.Required
+    private String departure_date;
     @Constraints.Required
     private String departure_time;
     @Constraints.Required
     private String arrival_time;
-    private double price;
-
 
     public FlightSchedule(){
 
     }
 
-    public FlightSchedule(int id, String flight_date, String departure_time, String arrival_time, double cost){
+    public FlightSchedule(int id,String destination, String origin, String departure_date, String departure_time, String arrival_time){
         this.flight_ID = id;
-        this.flight_date = flight_date;
+        this.destination = destination;
+        this.origin = origin;
+        this.departure_date = departure_date;
         this.departure_time = departure_time;
         this.arrival_time = arrival_time;
-        this.price = cost;
     }
 
     public static Finder<Integer, FlightSchedule> find = new Finder<Integer,FlightSchedule>(FlightSchedule.class);
@@ -39,50 +41,51 @@ public class FlightSchedule extends Model {
         return FlightSchedule.find.all();
     }
 
-    //get and set flight id
-    public int getFlightID(){
+    public int getFlight_ID() {
         return flight_ID;
     }
 
-    public void setFlightID(int id){
-        this.flight_ID = id;
+    public void setFlight_ID(int flight_ID) {
+        this.flight_ID = flight_ID;
     }
 
-    //get and set flight date
-    public String getFlightDate(){
-        return flight_date;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setFlightDate(String flight_date){
-        this.flight_date = flight_date;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
-    //get and set departure_time
-    public String getDepTime(){
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDeparture_date() {
+        return departure_date;
+    }
+
+    public void setDeparture_date(String departure_date) {
+        this.departure_date = departure_date;
+    }
+
+    public String getDeparture_time() {
         return departure_time;
     }
 
-    public void setDepTime(String departure_time){
+    public void setDeparture_time(String departure_time) {
         this.departure_time = departure_time;
     }
 
-    //Get and set arrival_time
-    public String getArrTime(){
+    public String getArrival_time() {
         return arrival_time;
     }
 
-    public void setArrTime(String arrival_time){
+    public void setArrival_time(String arrival_time) {
         this.arrival_time = arrival_time;
     }
-
-    //get and set cost
-    public double getPrice(){
-        return price;
-    }
-
-    public void setPrice(double cost){
-        this.price = cost;
-    }
-
-
 }

@@ -7,7 +7,9 @@
   <h3>Add a new Flight</h3>
 
   @form(action = routes.AdminController.addFlightSubmit(), 'class -> "form-horizontal", 'role -> "form"){
-    @inputText(addFlightForm("flight_date"), '_label -> "Flight Date", 'class -> "form-control")
+    @inputText(addFlightForm("destination"), '_label -> "Destination", 'class -> "form-control")
+    @inputText(addFlightForm("origin"), '_label -> "Origin", 'class -> "form-control")
+    @inputText(addFlightForm("departure_date"), '_label -> "Departure Date", 'class -> "form-control")
     @inputText(addFlightForm("departure_time"), '_label -> "Departure Time", 'class -> "form-control")
     @inputText(addFlightForm("arrival_time"), '_label -> "Arrival Time", 'class -> "form-control")
 

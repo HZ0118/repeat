@@ -5,10 +5,11 @@
 
 create table flight_schedule (
   flight_id                     integer not null,
-  flight_date                   varchar(255),
+  destination                   varchar(255),
+  origin                        varchar(255),
+  departure_date                varchar(255),
   departure_time                varchar(255),
   arrival_time                  varchar(255),
-  price                         double,
   constraint pk_flight_schedule primary key (flight_id)
 );
 create sequence flight_schedule_seq;
