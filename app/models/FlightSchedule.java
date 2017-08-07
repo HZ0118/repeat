@@ -10,51 +10,65 @@ import com.avaje.ebean.*;
 @Entity
 public class FlightSchedule extends Model {
     @Id
-    private Integer flight_ID;
-    @Constraints.Required
-    private String destination;
+    private Long flight_ID;
     @Constraints.Required
     private String origin;
+    @ManyToOne
+    private Destination destination;
+    @Constraints.Required
+    private String city;
     @Constraints.Required
     private String departure_date;
     @Constraints.Required
     private String departure_time;
     @Constraints.Required
     private String arrival_time;
+    @Constraints.Required
+    private int seats;
 
     public FlightSchedule(){
 
     }
 
-    public FlightSchedule(Integer id,String destination, String origin, String departure_date, String departure_time, String arrival_time){
+    public FlightSchedule(Long id, Destination destination, String city, String origin, String departure_date, String departure_time, String arrival_time, int seats){
         this.flight_ID = id;
         this.destination = destination;
+        this.setCity(city);
         this.origin = origin;
         this.departure_date = departure_date;
         this.departure_time = departure_time;
         this.arrival_time = arrival_time;
+        this.setSeats(seats);
     }
 
-    public static Finder<Integer, FlightSchedule> find = new Finder<Integer,FlightSchedule>(FlightSchedule.class);
+    public static Finder<Long, FlightSchedule> find = new Finder<Long,FlightSchedule>(FlightSchedule.class);
 
     public static List<FlightSchedule> findAll(){
         return FlightSchedule.find.all();
     }
 
-    public Integer getFlight_ID() {
+    public Long getFlight_ID() {
         return flight_ID;
     }
 
-    public void setFlight_ID(Integer flight_ID) {
+    public void setFlight_ID(Long flight_ID) {
         this.flight_ID = flight_ID;
     }
 
-    public String getDestination() {
+    public Destination getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(Destination destination) {
         this.destination = destination;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getOrigin() {
@@ -88,4 +102,13 @@ public class FlightSchedule extends Model {
     public void setArrival_time(String arrival_time) {
         this.arrival_time = arrival_time;
     }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public void setSeats(int seats) {
+        this.seats = seats;
+    }
+
 }

@@ -7,13 +7,22 @@
   <h3>Add a new Flight</h3>
 
   @form(action = routes.AdminController.addFlightSubmit(), 'class -> "form-horizontal", 'role -> "form"){
-    @inputText(addFlightForm("destination"), '_label -> "Destination", 'class -> "form-control")
+    @select(
+      addFlightForm("destination.id"),
+      options(Destination.options()),
+      '_label -> "Destination", '_default -> "-- Choose a Destination --",
+      '_showConstraints -> false, 'class -> "form-control"
+    )
+    @inputText(addFlightForm("city"), '_label -> "Destination City", 'class -> "form-control")
     @inputText(addFlightForm("origin"), '_label -> "Origin", 'class -> "form-control")
     @inputText(addFlightForm("departure_date"), '_label -> "Departure Date", 'class -> "form-control")
     @inputText(addFlightForm("departure_time"), '_label -> "Departure Time", 'class -> "form-control")
     @inputText(addFlightForm("arrival_time"), '_label -> "Arrival Time", 'class -> "form-control")
+    @inputText(addFlightForm("seats"), '_label -> "Total Seats", 'class -> "form-control")
 
     @inputText(addFlightForm("flight_ID"), '_label -> "", 'hidden -> "hidden")
+    @inputText(addFlightForm("id"), '_label -> "", 'hidden -> "hidden")
+
 
     <div class="actions">
       <input type="submit" value="Add Flight" class="btn btn-primary">

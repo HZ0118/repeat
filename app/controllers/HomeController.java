@@ -1,10 +1,7 @@
 package controllers;
 
-import controllers.*;
-import play.api.Environment;
 import play.mvc.*;
 import play.data.*;
-import play.db.ebean.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +29,16 @@ public class HomeController extends Controller {
         return ok(index.render(getUserFromSession()));
     }
 
-    public Result flights() {
-        List<FlightSchedule> flightsList = FlightSchedule.findAll();
-        return ok(displayFlights.render(flightsList, getUserFromSession()));
+    public Result flights(Long dest) {
+        List<Destination> destinationList = Destination.findAll();
+        List<FlightSchedule> flightsList = new ArrayList<FlightSchedule>();
+        if(dest == 0){
+            flightsList = FlightSchedule.findAll();
+        }
+        else{
+            flightsList = Destination.find.ref(dest).getFlights();
+        }
+        return ok(displayFlights.render(flightsList, destinationList, getUserFromSession()));
     }
 
 

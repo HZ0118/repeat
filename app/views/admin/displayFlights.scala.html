@@ -1,57 +1,76 @@
 @import models.users.User
-@(flights: List[models.FlightSchedule], user: User)
+@(flights: List[models.FlightSchedule], destinations: List[models.Destination], user: User)
 
 @admin.adminMain("Flight", user){
-  @if(flash.containsKey("success")){
-    <div class="alert alert-success">
-    @flash.get("success")
+  <div class="row">
+    <div class="col-sm-2">
+      <h4>Destinations</h4>
+      <div class="list-group">
+        <a href="@routes.HomeController.flights(0)" class="list-group-item">All Destinations</a>
+
+        @for(d <- destinations) {
+          <a href="@routes.HomeController.flights(d.getId)" class="list-group-item">@d.getDestination</a>
+        }
+      </div>
     </div>
-  }
 
-  <table class="table table-bordered table-hover table-condensed">
-    <thead>
-      <tr>
-        <th>Flight</th>
-        <th>Destination</th>
-        <th>Origin</th>
-        <th>Departure Date</th>
-        <th>Departure Time</th>
-        <th>Arrival Time</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <h3>Flight List</h3>
-      @for(f <- flights) {
-        <tr>
-          <td class="numeric">@f.getFlight_ID</td>
-          <td>@f.getDestination</td>
-          <td>@f.getOrigin</td>
-          <td>@f.getDeparture_date</td>
-          <td>@f.getDeparture_time</td>
-          <td>@f.getArrival_time</td>
-          <td>
-            <a href="@routes.AdminController.updateFlight(f.getFlight_ID)" class="btn-xs btn-danger">
-              <span class="glyphicon glyphicon-pencil"></span></a>
-          </td>
-          <td>
-            <a href="@routes.AdminController.deleteFlight(f.getFlight_ID)" class="btn-xs btn-danger" onclick="return confirmDel();">
-              <span class="glyphicon glyphicon-trash"></span>
-            </a>
-          <td>
-        </tr>
+    <div class="col-sm-10">
+      @if(flash.containsKey("success")){
+        <div class="alert alert-success">
+        @flash.get("success")
+        </div>
       }
-    </tbody>
-  </table>
-  <p>
-    <a href="@routes.AdminController.addFlight()">
-      <button class="btn btn-primary">Add a Flight</button>
-    </a>
-  </p>
 
-  <script>
-          function confirmDel(){
-            return confirm('Are you sure?');
+      <table class="table table-bordered table-hover table-condensed">
+        <thead>
+          <tr>
+            <th>Flight</th>
+            <th>Destination</th>
+            <th>Destination City</th>
+            <th>Origin</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Total Seats</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <h3>Flight List</h3>
+          @for(f <- flights) {
+            <tr>
+              <td class="numeric">@f.getFlight_ID</td>
+              <td>@f.getDestination.getDestination</td>
+              <td>@f.getCity</td>
+              <td>@f.getOrigin</td>
+              <td>@f.getDeparture_date</td>
+              <td>@f.getDeparture_time</td>
+              <td>@f.getArrival_time</td>
+              <td>@f.getSeats</td>
+              <td>
+                <a href="@routes.AdminController.updateFlight(f.getFlight_ID)" class="btn-xs btn-danger">
+                  <span class="glyphicon glyphicon-pencil"></span></a>
+              </td>
+              <td>
+                <a href="@routes.AdminController.deleteFlight(f.getFlight_ID)" class="btn-xs btn-danger" onclick="return confirmDel();">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+              <td>
+            </tr>
           }
-  </script>
+        </tbody>
+      </table>
+      <p>
+        <a href="@routes.AdminController.addFlight()">
+          <button class="btn btn-primary">Add a Flight</button>
+        </a>
+      </p>
+
+      <script>
+              function confirmDel(){
+                return confirm('Are you sure?');
+              }
+      </script>
+    </div>
+  </div>
 }

@@ -41,7 +41,7 @@ public class LoginController extends Controller{
         }
         User u = User.getUserById(session().get("email"));
         if (u.getRole().equals("admin")) {
-            return redirect(controllers.routes.AdminController.flights());
+            return redirect(controllers.routes.AdminController.flights(0));
         }
         else {
             return redirect(controllers.routes.HomeController.index());
