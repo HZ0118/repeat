@@ -1,12 +1,12 @@
 @import models.users.User
 @import helper._
 
-@(addFlightForm: Form[models.FlightSchedule], user: User)
+@(addFlightForm: Form[models.FlightSchedule], user: User, env: play.api.Environment)
 
 @admin.adminMain("Add Flight", user){
   <h3>Add a new Flight</h3>
 
-  @form(action = routes.AdminController.addFlightSubmit(), 'class -> "form-horizontal", 'role -> "form"){
+  @form(action = routes.AdminController.addFlightSubmit(), 'class -> "form-horizontal", 'role -> "form", 'enctype -> "multipart/form-data"){
     @select(
       addFlightForm("destination.id"),
       options(Destination.options()),
@@ -23,6 +23,21 @@
     @inputText(addFlightForm("flight_ID"), '_label -> "", 'hidden -> "hidden")
     @inputText(addFlightForm("id"), '_label -> "", 'hidden -> "hidden")
 
+    <div class="container-fluid">
+      <div class="row">
+        <label>Image</label>
+      </div>
+      <div class="row">
+      @if(env.resource("public/images/flightImages/" + addFlightForm("flight_ID").value() + ".jpg").isDefined) {
+        <p><img src="/assets/images/flightImages/@(addFlightForm("flight_ID").value() + ".jpg")"/></p>
+      } else {
+        <p><img src="/assets/images/productImages/thumbnails/noImage.png"/></p>
+      }
+      </div>
+      <div class="row">
+        <input class="btn-sm btn-default" type="file" name="upload">
+      </div>
+    </div>
 
     <div class="actions">
       <input type="submit" value="Add Flight" class="btn btn-primary">

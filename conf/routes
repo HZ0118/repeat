@@ -25,7 +25,7 @@ GET     /admin/updateFlight/:id     controllers.AdminController.updateFlight(id:
 #   Users Page   #
 # # # # # # #  # #
 GET     /                           controllers.HomeController.index()
-GET     /flights                    controllers.HomeController.flights(dest: Long ?=0L)
+GET     /flights                    controllers.HomeController.flights(dest: Long ?=0L, filter?="")
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

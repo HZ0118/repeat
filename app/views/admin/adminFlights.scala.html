@@ -1,15 +1,15 @@
 @import models.users.User
-@(flights: List[models.FlightSchedule], destinations: List[models.Destination], user: User)
+@(flights: List[models.FlightSchedule], destinations: List[models.Destination], user: User, env: play.api.Environment)
 
 @admin.adminMain("Flight", user){
   <div class="row">
     <div class="col-sm-2">
       <h4>Destinations</h4>
       <div class="list-group">
-        <a href="@routes.HomeController.flights(0)" class="list-group-item">All Destinations</a>
+        <a href="@routes.AdminController.flights(0)" class="list-group-item">All Destinations</a>
 
         @for(d <- destinations) {
-          <a href="@routes.HomeController.flights(d.getId)" class="list-group-item">@d.getDestination</a>
+          <a href="@routes.AdminController.flights(d.getId)" class="list-group-item">@d.getDestination</a>
         }
       </div>
     </div>
@@ -24,6 +24,7 @@
       <table class="table table-bordered table-hover table-condensed">
         <thead>
           <tr>
+            <th>Image</th>
             <th>Flight</th>
             <th>Destination</th>
             <th>Destination City</th>
@@ -39,6 +40,11 @@
           <h3>Flight List</h3>
           @for(f <- flights) {
             <tr>
+              @if(env.resource("public/images/productImages/thumbnails/" + f.getFlight_ID + ".jpg").isDefined){
+                <td><img src="/assets/images/flightImages/thumbnails/@(f.getFlight_ID +".jpg")"/></td>
+              } else {
+                <td><img src="/assets/images/flightImages/thumbnails/noImage.png"/></td>
+              }
               <td class="numeric">@f.getFlight_ID</td>
               <td>@f.getDestination.getDestination</td>
               <td>@f.getCity</td>

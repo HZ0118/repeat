@@ -1,5 +1,5 @@
 @import models.users.User
-@(flights: List[models.FlightSchedule], destinations: List[models.Destination], user: User)
+@(flights: List[models.FlightSchedule], destinations: List[models.Destination], user: User, env: play.api.Environment, destId: Long, filter: String)
 
 @main("Flight", user){
 
@@ -7,12 +7,19 @@
     <div class="col-sm-2">
       <h4>Destinations</h4>
       <div class="list-group">
-        <a href="@routes.HomeController.flights(0)" class="list-group-item">All Destinations</a>
+        <a href="@routes.HomeController.flights(0, filter)" class="list-group-item">All Destinations</a>
 
         @for(d <- destinations) {
-          <a href="@routes.HomeController.flights(d.getId)" class="list-group-item">@d.getDestination</a>
+          <a href="@routes.HomeController.flights(d.getId, filter)" class="list-group-item">@d.getDestination</a>
         }
       </div>
+    </div>
+
+    <div id="actions">
+      <form action="@routes.HomeController.flights(destId)" method="GET">
+        <input type="search" id="searchbox" name="filter" value="@filter" placeholder="Filter by destination city...">
+        <input type="submit" id="searchsubmit" value="Filter by city" class="btn-md btn-primary">
+      </form>
     </div>
 
     <div class="col-sm-10">
@@ -25,7 +32,8 @@
       <table class="table table-bordered table-hover table-condensed">
         <thead>
           <tr>
-            <th>Flight</th>
+            <th>Image</th>
+            <th>Flight ID</th>
             <th>Destination</th>
             <th>Destination City</th>
             <th>Origin</th>
@@ -40,6 +48,11 @@
           <h3>Flight List</h3>
           @for(f <- flights) {
             <tr>
+              @if(env.resource("public/images/productImages/thumbnails/" + f.getFlight_ID + ".jpg").isDefined){
+                <td><img src="/assets/images/flightImages/thumbnails/@(f.getFlight_ID +".jpg")"/></td>
+              } else {
+                <td><img src="/assets/images/flightImages/thumbnails/noImage.png"/></td>
+              }
               <td class="numeric">@f.getFlight_ID</td>
               <td>@f.getDestination.getDestination</td>
               <td>@f.getCity</td>

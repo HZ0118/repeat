@@ -3,13 +3,21 @@ package controllers;
 import controllers.Security.AuthAdmin;
 import controllers.Security.Secured;
 import models.Destination;
+
+import play.api.Environment;
 import play.mvc.*;
+import play.mvc.Http.*;
+import play.mvc.Http.MultipartFormData.FilePart;
 import play.data.*;
 import play.db.ebean.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import java.io.File;
+
+import org.im4java.core.ConvertCmd;
+import org.im4java.core.IMOperation;
 
 import views.html.admin.*;
 
@@ -20,10 +28,12 @@ import models.users.User;
 @With(AuthAdmin.class)
 public class AdminController extends Controller {
     private FormFactory formFactory;
+    private Environment env;
 
     @Inject
-    public AdminController(FormFactory f){
+    public AdminController(FormFactory f, Environment e){
         this.formFactory = f;
+        this.env = e;
     }
 
     private User getUserFromSession() {
@@ -39,19 +49,19 @@ public class AdminController extends Controller {
         else {
             flightsList = Destination.find.ref(dest).getFlights();
         }
-        return ok(views.html.admin.displayFlights.render(flightsList, destinationList, getUserFromSession()));
+        return ok(adminFlights.render(flightsList, destinationList, getUserFromSession(), env));
     }
 
     public Result addFlight(){
         Form<FlightSchedule> addFlightForm = formFactory.form(FlightSchedule.class);
-        return ok(addFlights.render(addFlightForm, getUserFromSession()));
+        return ok(addFlights.render(addFlightForm, getUserFromSession(), env));
     }
 
     @Transactional
     public Result addFlightSubmit(){
         Form<FlightSchedule> newFlightForm = formFactory.form(FlightSchedule.class).bindFromRequest();
         if(newFlightForm.hasErrors()){
-            return badRequest(addFlights.render(newFlightForm, getUserFromSession()));
+            return badRequest(addFlights.render(newFlightForm, getUserFromSession(), env));
         }
         FlightSchedule newFlight = newFlightForm.get();
         if(newFlight.getFlight_ID() == null) {
@@ -60,8 +70,40 @@ public class AdminController extends Controller {
         else if (newFlight.getFlight_ID() != null) {
             newFlight.update();
         }
-        flash("success", "Flight to " + newFlight.getCity() + " has been created/ updated");
+        String saveImageMsg;
+        MultipartFormData data = request().body().asMultipartFormData();
+        FilePart image = data.getFile("upload");
+        saveImageMsg = saveFile(newFlight.getFlight_ID(), image);
+
+        flash("success", "Flight to " + newFlight.getCity() + " has been created/updated" + saveImageMsg);
         return redirect(controllers.routes.AdminController.flights(0));
+    }
+
+    public String saveFile(Long id, FilePart<File> image){
+        if(image != null){
+            String mimeType = image.getContentType();
+            if(mimeType.startsWith("image/")){
+                File file = image.getFile();
+                ConvertCmd cmd = new ConvertCmd();
+                IMOperation op = new IMOperation();
+                op.addImage(file.getAbsolutePath());
+                op.resize(300,200);
+                op.addImage("public/images/flightImages/" + id + ".jpg");
+                IMOperation thumb = new IMOperation();
+                thumb.addImage(file.getAbsolutePath());
+                thumb.thumbnail(60);
+                thumb.addImage("public/images/flightImages/thumbnails/" + id + ".jpg");
+                try{
+                    cmd.run(op);
+                    cmd.run(thumb);
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+                return " and image saved";
+            }
+        }
+        return "image file missing";
     }
 
     @Transactional
@@ -81,7 +123,7 @@ public class AdminController extends Controller {
         } catch (Exception ex) {
             return badRequest("error");
         }
-        return ok(addFlights.render(flightForm, getUserFromSession()));
+        return ok(addFlights.render(flightForm, getUserFromSession(), env));
     }
 
 }

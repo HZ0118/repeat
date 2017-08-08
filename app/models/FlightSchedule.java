@@ -47,6 +47,21 @@ public class FlightSchedule extends Model {
         return FlightSchedule.find.all();
     }
 
+    public static List<FlightSchedule> findAll(String filter){
+        return FlightSchedule.find.where()
+                .ilike("city", "%" + filter + "%")
+                .orderBy("city asc")
+                .findList();
+    }
+
+    public static List<FlightSchedule> findFilter(Long destID, String filter){
+        return FlightSchedule.find.where()
+                .eq("destination.id", destID)
+                .ilike("city", "%" + filter + "%")
+                .orderBy("city asc")
+                .findList();
+    }
+
     public Long getFlight_ID() {
         return flight_ID;
     }
