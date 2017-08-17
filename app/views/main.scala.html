@@ -20,7 +20,7 @@
             <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body style = "background-image: url(@routes.Assets.versioned("images/back.jpg")")>
+    <body>
         <nav>
             <a href="@routes.HomeController.index()">
                 <img src="@routes.Assets.versioned("images/logo.png")"/>
@@ -39,11 +39,12 @@
                 </li>
             </ul>
         </nav>
-        <div class="banner">
-            <img src="@routes.Assets.versioned("images/banner.jpg")" width="100%"/>
+
+        <div>
+            <img src="@routes.Assets.versioned("images/banner1.jpg")" width="100%" height="400px"/>
         </div>
 
-        <div class="container text-center">
+        <div class="container text-center" id="borders">
             @* And here's where we render the `Html` object containing
             * the page content. *@
             @content

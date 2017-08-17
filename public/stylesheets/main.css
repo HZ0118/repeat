@@ -4,11 +4,12 @@ main {
 
 body {
     margin-bottom: 100px;
+    background-repeat: no-repeat;
 }
 
 nav {
     height: 70px;
-    background-color: darkblue;
+    background-color: darkturquoise;
 }
 
 nav img{
@@ -47,7 +48,7 @@ nav ul li a {
     width: 100px;
     text-decoration: none;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
-    color: white;
+    color: darkblue;
     text-align: center;
     line-height: 60px;
     display:flex;
@@ -59,15 +60,51 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: mediumblue;
+    background-color: deepskyblue;
 }
 
 nav li:last-child a {
     border-right: 0;
 }
 
+#borders{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-style: double;
+    border-width: thick;
+    border-color: aqua;
+}
+
 #intro {
-    padding: 50px 0;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 60px;
+}
+
+#iconImg{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 60%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#iconImg > div {
+    width: 100px;
+    height: 100px;
+}
+
+#imageCards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto;
+    margin-left: 15px;
 }
 
 div.polaroid {
@@ -77,8 +114,7 @@ div.polaroid {
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
-    margin-right: 25px;
-    float: left;
+    margin-right: 30px;
 }
 
 div.polaroid p {
@@ -101,6 +137,7 @@ div.polaroid p {
     cursor: pointer;
     clear: both;
     margin: auto;
+    margin-bottom: 20px;
 }
 
 #moreFlights a {
@@ -118,17 +155,26 @@ html {
 }
 
 footer{
-    background-color: darkblue;
+    background-color: darkturquoise;
     position: absolute;
     bottom: 0;
     height: 50px;
     width: 100%;
     overflow: hidden;
-    color: white;
+    color: darkblue;
     text-align: center;
     margin-top: 25px;
 }
 
 footer p {
     padding-top: 15px;
+}
+
+#side{
+    margin-top: 30px;
+}
+
+.filter{
+    margin-top: 60px;
+    margin-bottom: 40px;
 }

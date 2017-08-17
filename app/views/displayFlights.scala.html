@@ -4,7 +4,7 @@
 @main("Flight", user){
 
   <div class="row">
-    <div class="col-sm-2">
+    <div class="col-sm-2" id="side">
       <h4>Destinations</h4>
       <div class="list-group">
         <a href="@routes.HomeController.flights(0, filter)" class="list-group-item">All Destinations</a>
@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div id="actions">
+    <div id="actions" class="filter">
       <form action="@routes.HomeController.flights(destId)" method="GET">
         <input type="search" id="searchbox" name="filter" value="@filter" placeholder="Filter by destination city...">
         <input type="submit" id="searchsubmit" value="Filter by city" class="btn-md btn-primary">

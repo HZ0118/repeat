@@ -18,6 +18,8 @@ GET     /logout                     controllers.Security.LoginController.logout(
 GET     /admin/flights              controllers.AdminController.flights(dest: Long ?=0L)
 GET     /admin/addflight            controllers.AdminController.addFlight()
 POST    /admin/addFlightSubmit      controllers.AdminController.addFlightSubmit()
+GET     /admin/addDestination       controllers.AdminController.addDestination()
+POST    /admin/addDestinationSubmit controllers.AdminController.addDestinationSubmit()
 GET     /admin/delFlight/:id        controllers.AdminController.deleteFlight(id: Long)
 GET     /admin/updateFlight/:id     controllers.AdminController.updateFlight(id: Long)
 

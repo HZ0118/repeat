@@ -1,0 +1,22 @@
+@import models.users.User
+@import helper._
+
+@(addDestinationForm: Form[models.Destination], user: User, env: play.api.Environment)
+
+@admin.adminMain("Add Destination", user){
+  <h3>Add a new Destination</h3>
+
+  @form(action = routes.AdminController.addDestinationSubmit(), 'class -> "form-horizontal", 'role -> "form", 'enctype -> "multipart/form-data"){
+    @inputText(addDestinationForm("destination"), '_label -> "Destination", 'class -> "form-control")
+
+    @inputText(addDestinationForm("id"), '_label -> "", 'hidden -> "hidden")
+
+    <div class="actions">
+      <input type="submit" value="Add Destination" class="btn btn-primary">
+      <a href="@routes.AdminController.flights(0)">
+        <button class="btn btn-warning">Cancel</button>
+      </a>
+    </div>
+  }
+
+}

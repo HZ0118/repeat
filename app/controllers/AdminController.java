@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.*;
 import controllers.Security.AuthAdmin;
 import controllers.Security.Secured;
 import models.Destination;
@@ -57,6 +58,11 @@ public class AdminController extends Controller {
         return ok(addFlights.render(addFlightForm, getUserFromSession(), env));
     }
 
+    public Result addDestination(){
+        Form<Destination> addDestinationForm = formFactory.form(Destination.class);
+        return ok(addDestination.render(addDestinationForm, getUserFromSession(), env));
+    }
+
     @Transactional
     public Result addFlightSubmit(){
         Form<FlightSchedule> newFlightForm = formFactory.form(FlightSchedule.class).bindFromRequest();
@@ -76,6 +82,19 @@ public class AdminController extends Controller {
         saveImageMsg = saveFile(newFlight.getFlight_ID(), image);
 
         flash("success", "Flight to " + newFlight.getCity() + " has been created/updated" + saveImageMsg);
+        return redirect(controllers.routes.AdminController.flights(0));
+    }
+
+    @Transactional
+    public Result addDestinationSubmit(){
+        Form<Destination> newDestinationForm = formFactory.form(Destination.class).bindFromRequest();
+        if(newDestinationForm.hasErrors()){
+            return badRequest(addDestination.render(newDestinationForm, getUserFromSession(), env));
+        }
+        Destination newDestination = newDestinationForm.get();
+        if(newDestination.getId()==null){
+            newDestination.save();
+        }
         return redirect(controllers.routes.AdminController.flights(0));
     }
 

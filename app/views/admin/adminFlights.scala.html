@@ -3,7 +3,7 @@
 
 @admin.adminMain("Flight", user){
   <div class="row">
-    <div class="col-sm-2">
+    <div class="col-sm-2" id="side">
       <h4>Destinations</h4>
       <div class="list-group">
         <a href="@routes.AdminController.flights(0)" class="list-group-item">All Destinations</a>
@@ -12,6 +12,12 @@
           <a href="@routes.AdminController.flights(d.getId)" class="list-group-item">@d.getDestination</a>
         }
       </div>
+
+      <p>
+        <a href="@routes.AdminController.addDestination()">
+          <button class="btn btn-primary">Add a Destination</button>
+        </a>
+      </p>
     </div>
 
     <div class="col-sm-10">
@@ -21,7 +27,7 @@
         </div>
       }
 
-      <table class="table table-bordered table-hover table-condensed">
+      <table class="table table-bordered table-hover table-condensed" id="side">
         <thead>
           <tr>
             <th>Image</th>
@@ -71,6 +77,7 @@
           <button class="btn btn-primary">Add a Flight</button>
         </a>
       </p>
+
 
       <script>
               function confirmDel(){
