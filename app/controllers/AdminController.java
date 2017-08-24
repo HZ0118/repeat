@@ -13,6 +13,7 @@ import play.data.*;
 import play.db.ebean.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import java.io.File;
@@ -50,6 +51,13 @@ public class AdminController extends Controller {
         else {
             flightsList = Destination.find.ref(dest).getFlights();
         }
+        Date currentDate = new Date();
+        for(FlightSchedule f: flightsList){
+            if(currentDate.equals(f.getDate())){
+                f.delete();
+                f.update();
+            }
+        }
         return ok(adminFlights.render(flightsList, destinationList, getUserFromSession(), env));
     }
 
@@ -67,6 +75,10 @@ public class AdminController extends Controller {
     public Result addFlightSubmit(){
         Form<FlightSchedule> newFlightForm = formFactory.form(FlightSchedule.class).bindFromRequest();
         if(newFlightForm.hasErrors()){
+            return badRequest(addFlights.render(newFlightForm, getUserFromSession(), env));
+        }
+        Date currentDate = new Date();
+        if(currentDate.after(newFlightForm.get().getDate())){
             return badRequest(addFlights.render(newFlightForm, getUserFromSession(), env));
         }
         FlightSchedule newFlight = newFlightForm.get();

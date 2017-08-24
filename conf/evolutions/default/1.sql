@@ -15,7 +15,7 @@ create table flight_schedule (
   origin                        varchar(255),
   destination_id                bigint,
   city                          varchar(255),
-  departure_date                varchar(255),
+  departure_date                timestamp,
   departure_time                varchar(255),
   arrival_time                  varchar(255),
   seats                         integer,

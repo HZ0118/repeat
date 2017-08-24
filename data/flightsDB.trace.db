@@ -68,3 +68,6 @@ select t0.flight_id c0, t0.origin c1, t0.city c2, t0.departure_date c3, t0.depar
 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2017-08-24 19:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO USER(EMAIL, ROLE, NAME, PASSWORD) VALUES (ADMIN@[*]IRISHFLIGHTS.COM, ADMIN, ALICE ADMIN, ADMIN) "; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into user(email, role, name, password) values (admin@irishflights.com, admin, Alice admin, admin) [42001-192]

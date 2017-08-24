@@ -1,5 +1,6 @@
 package models;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.persistence.*;
 
@@ -18,7 +19,7 @@ public class FlightSchedule extends Model {
     @Constraints.Required
     private String city;
     @Constraints.Required
-    private String departure_date;
+    private Date departure_date;
     @Constraints.Required
     private String departure_time;
     @Constraints.Required
@@ -30,7 +31,7 @@ public class FlightSchedule extends Model {
 
     }
 
-    public FlightSchedule(Long id, Destination destination, String city, String origin, String departure_date, String departure_time, String arrival_time, int seats){
+    public FlightSchedule(Long id, Destination destination, String city, String origin, Date departure_date, String departure_time, String arrival_time, int seats){
         this.flight_ID = id;
         this.destination = destination;
         this.setCity(city);
@@ -95,10 +96,16 @@ public class FlightSchedule extends Model {
     }
 
     public String getDeparture_date() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dateInString = sdf.format(departure_date);
+        return dateInString;
+    }
+
+    public Date getDate(){
         return departure_date;
     }
 
-    public void setDeparture_date(String departure_date) {
+    public void setDeparture_date(Date departure_date) {
         this.departure_date = departure_date;
     }
 
