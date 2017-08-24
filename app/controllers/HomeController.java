@@ -44,4 +44,5 @@ public class HomeController extends Controller {
         return ok(displayFlights.render(flightsList, destinationList, getUserFromSession(), env, dest, filter));
     }
 
+
 }

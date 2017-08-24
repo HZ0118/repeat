@@ -53,9 +53,8 @@ public class AdminController extends Controller {
         }
         Date currentDate = new Date();
         for(FlightSchedule f: flightsList){
-            if(currentDate.equals(f.getDate())){
+            if(currentDate.equals(f.getDeparture_date())){
                 f.delete();
-                f.update();
             }
         }
         return ok(adminFlights.render(flightsList, destinationList, getUserFromSession(), env));
@@ -78,7 +77,7 @@ public class AdminController extends Controller {
             return badRequest(addFlights.render(newFlightForm, getUserFromSession(), env));
         }
         Date currentDate = new Date();
-        if(currentDate.after(newFlightForm.get().getDate())){
+        if(currentDate.after(newFlightForm.get().getDeparture_date())){
             return badRequest(addFlights.render(newFlightForm, getUserFromSession(), env));
         }
         FlightSchedule newFlight = newFlightForm.get();
@@ -134,7 +133,7 @@ public class AdminController extends Controller {
                 return " and image saved";
             }
         }
-        return "image file missing";
+        return ", image file missing";
     }
 
     @Transactional

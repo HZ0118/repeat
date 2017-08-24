@@ -1,5 +1,6 @@
 @import models.users.User
 @(flights: List[models.FlightSchedule], destinations: List[models.Destination], user: User, env: play.api.Environment, destId: Long, filter: String)
+@import helper._
 
 @main("Flight", user){
 

@@ -55,12 +55,23 @@ public class FlightSchedule extends Model {
                 .findList();
     }
 
-    public static List<FlightSchedule> findFilter(Long destID, String filter){
+    public static List<FlightSchedule> findFilter(Long destID, String filterCity){
         return FlightSchedule.find.where()
                 .eq("destination.id", destID)
-                .ilike("city", "%" + filter + "%")
+                .ilike("city", "%" + filterCity + "%")
                 .orderBy("city asc")
                 .findList();
+    }
+
+    public List<FlightSchedule> filterDate(Date fromDate, Date toDate){
+        List<FlightSchedule> flights = FlightSchedule.findAll();
+        List<FlightSchedule> flightsList = new ArrayList<FlightSchedule>();
+        for(FlightSchedule f: flights){
+            if(f.departure_date.after(fromDate) && f.departure_date.before(toDate)){
+                flightsList.add(f);
+            }
+        }
+        return flightsList;
     }
 
     public Long getFlight_ID() {
@@ -95,13 +106,7 @@ public class FlightSchedule extends Model {
         this.origin = origin;
     }
 
-    public String getDeparture_date() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String dateInString = sdf.format(departure_date);
-        return dateInString;
-    }
-
-    public Date getDate(){
+    public Date getDeparture_date() {
         return departure_date;
     }
 
